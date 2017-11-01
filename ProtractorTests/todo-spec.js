@@ -2,7 +2,7 @@ describe('CDBU Modern Software Factory UI Test - nateDevollModernSof-env-preprod
   it('should add a todo', function() {
     browser.ignoreSynchronization = true;
     browser.get('http://msf-preprod.cdbu.io');
-    element(by.css('[name="name"]')).sendKeys('Selenium Test User');
-    element(by.buttonText('Submit')).click();
+    element(by.css('[name="name"]')).sendKeys('Selenium Test User'Keys.RETURN);
+    //element(by.buttonText('Submit')).click();
     });
 });
