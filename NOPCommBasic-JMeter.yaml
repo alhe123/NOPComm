@@ -1,0 +1,67 @@
+---
+execution:
+  scenario: NOPCommBasic
+  concurrency: 20
+  ramp-up: 1m
+  hold-for: 19m
+scenarios:
+  NOPCommBasic:
+    headers:
+      User-Agent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+      Accept-Encoding: 'gzip, deflate'
+      Accept-Language: 'en-US,en;q=0.9'
+    requests:
+      - transaction: Home
+        force-parent-sample: false
+        do:
+          - url: 'http://demo.bzm-presales.com/nopCommerce/computers'
+            method: GET
+            label: 'http://demo.bzm-presales.com/nopCommerce/computers'
+            think-time: 0ms
+            headers:
+              Upgrade-Insecure-Requests: '1'
+              Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+              Referer: 'http://demo.bzm-presales.com/nopcommerce'
+      - transaction: Select Category
+        force-parent-sample: false
+        do:
+          - url: 'http://demo.bzm-presales.com/nopCommerce/shoes'
+            method: GET
+            label: 'http://demo.bzm-presales.com/nopCommerce/shoes'
+            think-time: 12774ms
+            headers:
+              Upgrade-Insecure-Requests: '1'
+              Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+              Referer: 'http://demo.bzm-presales.com/nopCommerce/computers'
+      - transaction: Add to Cart
+        force-parent-sample: false
+        do:
+          - url: 'http://demo.bzm-presales.com/nopCommerce/addproducttocart/catalog/24/1/1'
+            method: POST
+            label: 'http://demo.bzm-presales.com/nopCommerce/addproducttocart/catalog/24/1/1'
+            headers:
+              Accept: '*/*'
+              Origin: 'http://demo.bzm-presales.com'
+              X-Requested-With: XMLHttpRequest
+              Referer: 'http://demo.bzm-presales.com/nopCommerce/shoes'
+          - url: 'http://demo.bzm-presales.com/nopCommerce/nike-floral-roshe-customized-running-shoes'
+            method: GET
+            label: 'http://demo.bzm-presales.com/nopCommerce/nike-floral-roshe-customized-running-shoes'
+            think-time: 313ms
+            headers:
+              Upgrade-Insecure-Requests: '1'
+              Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+              Referer: 'http://demo.bzm-presales.com/nopCommerce/shoes'
+          - url: 'http://demo.bzm-presales.com/nopCommerce/shoppingcart/productdetails_attributechange?productId=24&validateAttributeConditions=False&loadPicture=True'
+            method: POST
+            label: 'http://demo.bzm-presales.com/nopCommerce/shoppingcart/productdetails_attributechange?productId=24&validateAttributeConditions=False&loadPicture=True'
+            headers:
+              Accept: '*/*'
+              Origin: 'http://demo.bzm-presales.com'
+              X-Requested-With: XMLHttpRequest
+              Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+              Referer: 'http://demo.bzm-presales.com/nopCommerce/nike-floral-roshe-customized-running-shoes'
+            body:
+              addtocart_24.EnteredQuantity: '1'
+              product_attribute_6: '13'
+              product_attribute_7: '17'
