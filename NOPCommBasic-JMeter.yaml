@@ -1,9 +1,9 @@
 ---
 execution:
   scenario: NOPCommBasic
-  concurrency: 20
-  ramp-up: 1m
-  hold-for: 19m
+  concurrency: 10
+  ramp-up: 30s
+  hold-for: 1m
 scenarios:
   NOPCommBasic:
     headers:
